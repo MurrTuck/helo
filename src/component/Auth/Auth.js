@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { connect } from "react-redux"
+import { updateUser } from "../../ducks/reducer"
 
 class Auth extends Component {
     constructor() {
@@ -27,14 +29,20 @@ class Auth extends Component {
 
     registerUser(){
         let {username, password} = this.state
-        axios.post('/api/auth/register', {username, password})
+        axios.post('/api/auth/register', {username, password}).then(res => {
+            console.log(res)
+            this.props.updateUser(res.data[0].id, res.data[0].username, res.data[0].profile_pic)
+            this.props.history.push("/dashboard")
+        })
         console.log("User has been registered!")
-        this.props.history.push("/dashboard")
     }
 
     loginUser(){
         let {username, password} = this.state
-        axios.post('/api/auth/login', {username, password})
+        axios.post('/api/auth/login', {username, password}).then(res => {
+            console.log(res)
+            this.props.updateUser(res.data[0].id, res.data[0].username, res.data[0].profile_pic)
+        })
         console.log("User has been logged in!")
         this.props.history.push("/dashboard")
     }
@@ -51,4 +59,5 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default connect(null, {updateUser})(Auth);
+
