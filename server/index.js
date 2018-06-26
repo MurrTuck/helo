@@ -21,6 +21,8 @@ app.post('/api/auth/register', controller.create_user)
 
 app.post('/api/auth/login', controller.login_user)
 
+app.get('')
+
 const port = 4000
 
 app.listen(port, () => console.log(`Listening on Port ${port}`))
