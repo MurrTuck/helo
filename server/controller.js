@@ -14,5 +14,33 @@ module.exports ={
         req.app.get("db").login_user(username, password).then(user => {
             res.status(200).send(user)
         })
+    },
+
+    get_posts: (req, res) => {
+        const db = req.app.get("db")
+        let {userid} = req.params
+        if(req.query.userposts && req.query.search){
+            db.get_posts_by_user([req.query.search]).then(posts => {
+                res.status(200).send(posts)
+            })
+        }
+        else if(!req.query.userposts && !req.query.search) {
+            db.get_posts_not_by_user([
+              userid
+            ]).then(posts => {
+              res.status(200).send(posts);
+            });
+        }
+        else if (!req.query.userposts && req.query.search) {
+            db.get_posts_by_search_not_user([
+                userid, req.query.search
+            ]).then(posts => {
+              res.status(200).send(posts);
+            });
+        } else {
+            db.get_all_posts().then(posts => {
+                res.status(200).send(posts);
+            });
+        }
     }
 }

@@ -21,7 +21,7 @@ app.post('/api/auth/register', controller.create_user)
 
 app.post('/api/auth/login', controller.login_user)
 
-app.get('')
+app.get("/api/posts/:userid", controller.get_posts)
 
 const port = 4000
 
