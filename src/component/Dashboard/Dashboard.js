@@ -15,7 +15,11 @@ class Dashboard extends Component {
             }, {
                     title: 'Test Post #2',
                     username: 'Richie',
-                    profilePic: 'Phat Clouds'
+                    profilePic: 'Pugs!'
+            }, {
+                title: 'More fake data',
+                username: 'helo',
+                profilePic: 'fake picture'
             }]
         }
     }
