@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
 
 class Dashboard extends Component {
@@ -28,6 +30,8 @@ class Dashboard extends Component {
         this.setState({search: e})
     }
 
+    
+
 
     render() {
         let posts = this.state.posts.map((elem, index) => {
@@ -45,4 +49,12 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+
+//pulling id off of Redux State
+let mapPropsToState = (state) => {
+    return{
+        id: state.id
+    }
+}
+
+export default connect(mapPropsToState) (Dashboard);
