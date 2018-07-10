@@ -20,6 +20,7 @@ module.exports ={
         console.log('get_posts hit')
         const db = req.app.get("db")
         let {userid} = req.params
+        console.log("userid:", userid, "req.query.userposts:", req.query.userposts, "req.query.search", req.query.search);
         if(req.query.userposts && req.query.search){
             db.get_posts_by_user([req.query.search]).then(posts => {
                 res.status(200).send(posts)

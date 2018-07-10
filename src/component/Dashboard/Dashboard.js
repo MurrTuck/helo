@@ -19,6 +19,13 @@ class Dashboard extends Component {
         this.setState({search: e})
     }
 
+    resetSearch(){
+        axios.get(`/api/posts/${this.props.id}?search=${this.state.search}&userposts=${this.state.checkbox}`)
+        .then(res => {
+            this.setState({search: '', posts: res.data})
+        });
+    }
+
     componentDidMount() {
         this.getPosts()
     }
@@ -33,6 +40,7 @@ class Dashboard extends Component {
 
     toggleCheckbox(){
         this.setState({checkbox: !this.state.checkbox})
+        this.resetSearch()
     }
     
 
@@ -47,7 +55,7 @@ class Dashboard extends Component {
             <button>Search</button>
             <button>Reset</button>
             <span>My Posts</span>
-            <input type='checkbox' onClick={() => this.toggleCheckbox()}/>
+            <input type='checkbox' onClick={() => this.toggleCheckbox()} value={this.state.search}/>
             {posts}
           </div>;
     }

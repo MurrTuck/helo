@@ -1,6 +1,6 @@
 let initialState = {
     username: '',
-    id: '',
+    id: 0,
     profilePicture: '',
 };
 
