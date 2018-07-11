@@ -13,7 +13,6 @@ const app = express()
 app.use(bodyParser.json());
 
 massive(CONNECTION_STRING).then( db => {
-    console.log("Massive successfully connected to DB!!")
     app.set('db', db)
 })
 

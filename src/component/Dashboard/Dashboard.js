@@ -13,19 +13,20 @@ class Dashboard extends Component {
             posts: []
         }
         this.toggleCheckbox = this.toggleCheckbox.bind(this)
+        this.searchInput = this.searchInput.bind(this)
     }
-
+    
     searchInput(e){
         this.setState({search: e})
     }
-
+    
     resetSearch(){
         axios.get(`/api/posts/${this.props.id}?search=${this.state.search}&userposts=${this.state.checkbox}`)
         .then(res => {
-            this.setState({search: '', posts: res.data})
+            this.setState({ posts: res.data, search: ''})
         });
     }
-
+    
     componentDidMount() {
         this.getPosts()
     }
@@ -50,11 +51,11 @@ class Dashboard extends Component {
             return <div key={index}>{elem.title}{elem.username}{elem.profilePic}</div>
         })
         return <div>
-            Dashboard
-            <input onChange={e => this.searchInput(e.target.value)} placeholder="search" />
+            This is the Dashboard
+            <input type="text" onChange={(e) => this.searchInput(e.target.value)} placeholder="search" />
             <button>Search</button>
-            <button>Reset</button>
-            <span>My Posts</span>
+            <button onClick={this.resetSearch.bind(this)}>Reset</button>
+            My Posts
             <input type='checkbox' onClick={() => this.toggleCheckbox()} value={this.state.search}/>
             {posts}
           </div>;

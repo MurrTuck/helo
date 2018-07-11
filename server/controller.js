@@ -21,6 +21,8 @@ module.exports ={
         const db = req.app.get("db")
         let {userid} = req.params
         console.log("userid:", userid, "req.query.userposts:", req.query.userposts, "req.query.search", req.query.search);
+
+        //When the users logs first time... 
         if(req.query.userposts && req.query.search){
             db.get_posts_by_user([req.query.search]).then(posts => {
                 res.status(200).send(posts)
@@ -29,6 +31,7 @@ module.exports ={
                 console.error(`get_posts failed in controller.js:`, err)
             })
         }
+        //only showing users posts...
         else if(!req.query.userposts && !req.query.search) {
             db.get_posts_not_by_user([
               userid
@@ -39,6 +42,7 @@ module.exports ={
                     console.error(`get_posts failed in controller.js:`, err);
                 });
         }
+        //Checked Selected only user id filtering post
         else if (!req.query.userposts && req.query.search) {
             db.get_posts_by_search_not_user([
                 userid, req.query.search
@@ -48,6 +52,7 @@ module.exports ={
                     res.status(500).send(err)
                     console.error(`get_posts failed in controller.js:`, err);
                 });
+                //check is not selected and search is not empty - filtering others posts. 
         } else {
             db.get_all_posts()
               .then(posts => {
@@ -58,5 +63,7 @@ module.exports ={
                 console.error(`get_posts failed in controller.js:`, err);
               });
         }
-    }
+    },
+
+
 }
