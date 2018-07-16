@@ -67,8 +67,9 @@ module.exports ={
 
     post_id (req, res) {
         let { postid } = req.params;
+        const db = req.app.get("db");
         console.log("GET Single post Endpoint is getting hit")
-        app.get('db').getSinglePost([postid]).then(post => {
+        app.get("db").getSinglePost([postid]).then(post => {
             res.status(200).send(post);
         })
     }

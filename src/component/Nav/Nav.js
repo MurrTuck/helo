@@ -9,7 +9,7 @@ function Nav (props) {
                 <Link to='/dashboard'>
                     <button className=''>Home</button>
                 </Link>
-                <Link to='/post'>
+                <Link to='/posts'>
                     <button className=''>New Post</button>
                 </Link>
                 <Link to='/'>

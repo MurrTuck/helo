@@ -58,7 +58,8 @@ class Dashboard extends Component {
   //Had profile_pic as profilePic and it didn't work. Worked out the bug and now it's working with profile_pic.
   render() {
     let posts = this.state.posts.map((elem, index) => {
-        return (<Link to={`/post/${elem.id}`} key={ elem }>
+        return (
+        <Link to={`/posts/${elem.id}`} key={ elem.id }>
         <div >
           <p>Post Title: {elem.title}</p>
           <p>Authors Name: {elem.username}</p>
