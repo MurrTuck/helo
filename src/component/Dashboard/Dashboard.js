@@ -58,17 +58,17 @@ class Dashboard extends Component {
   //Had profile_pic as profilePic and it didn't work. Worked out the bug and now it's working with profile_pic.
   render() {
     let posts = this.state.posts.map((elem, index) => {
-      return (
-        <div key={index}>
+        return (<Link to={`/post/${elem.id}`} key={ elem }>
+        <div >
           <p>Post Title: {elem.title}</p>
           <p>Authors Name: {elem.username}</p>
-          <img src={elem.profile_pic} alt="" />
-        </div>
+          <img src={elem.profile_pic} alt="" width='200px' />
+        </div></Link>
       );
     });
     return (
       <div>
-        This is the Dashboard
+        Dashboard eh'
         <input
           type="text"
           onChange={e => this.searchInput(e.target.value)}
