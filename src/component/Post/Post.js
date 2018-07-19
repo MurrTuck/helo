@@ -29,7 +29,7 @@ class Post extends Component {
         <img src={this.state.post.image} alt="" />
         <p>Content: {this.state.post.content}</p>
         <p>Username: {this.state.post.username}</p>
-        <img src={this.state.post.profile_pic} alt="" />
+        <img src={this.state.post.profile_pic} alt="" width="500px" />
       </div>
     );
   }
