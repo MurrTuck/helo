@@ -36,7 +36,7 @@ module.exports = {
     if (req.query.userposts && req.query.search) {
       db.get_posts_by_user([req.query.search])
         .then(posts => {
-          res.status(200).send(posts);
+          res.status(200).send({ posts, counter: req.session.user.counter });
         })
         .catch(err => {
           res.status(500).send(err);
@@ -47,7 +47,7 @@ module.exports = {
     else if (!req.query.userposts && !req.query.search) {
       db.get_posts_not_by_user([userid])
         .then(posts => {
-          res.status(200).send(posts);
+          res.status(200).send({ posts, counter: req.session.user.counter });
         })
         .catch(err => {
           res.status(500).send(err);
@@ -58,7 +58,7 @@ module.exports = {
     else if (!req.query.userposts && req.query.search) {
       db.get_posts_by_search_not_user([userid, req.query.search])
         .then(posts => {
-          res.status(200).send(posts);
+          res.status(200).send({ posts, counter: req.session.user.counter });
         })
         .catch(err => {
           res.status(500).send(err);
@@ -68,7 +68,7 @@ module.exports = {
     } else {
       db.get_all_posts()
         .then(posts => {
-          res.status(200).send(posts);
+          res.status(200).send({ posts, counter: req.session.user.counter });
         })
         .catch(err => {
           res.status(500).send(err);
@@ -87,10 +87,13 @@ module.exports = {
   },
 
   userid: (req, res) => {
-    const{ userid } = req.params;
-    const {title, img, content } = req.body;
-    app.get('db').createNewPost([title, img, content, userid]).then(info => {
+    const { userid } = req.params;
+    const { title, img, content } = req.body;
+    app
+      .get("db")
+      .createNewPost([title, img, content, userid])
+      .then(info => {
         res.status(200).send(info);
-    })
+      });
   }
 };

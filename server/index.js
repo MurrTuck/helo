@@ -1,32 +1,54 @@
-require('dotenv').config()
-const express = require('express')
-const bodyParser = require('body-parser')
-const massive = require('massive')
-const controller = require('./controller')
-const session = require('express-session')
+require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const massive = require("massive");
+const controller = require("./controller");
+const session = require("express-session");
 
-const { 
-    CONNECTION_STRING
-} = process.env;
+const { CONNECTION_STRING } = process.env;
 
-const app = express()
+const app = express();
 
 app.use(bodyParser.json());
 
-massive(CONNECTION_STRING).then( db => {
-    app.set('db', db)
-})
+massive(CONNECTION_STRING).then(db => {
+  app.set("db", db);
+});
 
-app.post('/api/auth/register', controller.create_user)
+app.use(
+  session({
+    secret: "Shhhhhhh",
+    saveUninitialized: true,
+    resave: false
+  })
+);
 
-app.post('/api/auth/login', controller.login_user)
+function middleware(req, res, next) {
+  if (!req.session.user) {
+    req.session.user = { counter: 0 };
+  } else {
+    req.session.user.counter += 1;
+  }
+  next();
+}
 
-app.get("/api/posts/:userid", controller.get_posts)
+app.post("/api/auth/register", controller.create_user);
 
-app.get("/api/post/:postid", controller.post_id)
+app.post("/api/auth/login", controller.login_user);
 
-app.post("/api/post/:userid", controller.userid)
+app.post("/api/session", (req, res, next) => {
+  req.session.destroy();
+  res.status(200).send("Session Destroyed");
+});
 
-const port = 4000
+app.use(middleware);
 
-app.listen(port, () => console.log(`{0,0} is Listening on Port ${port}`))
+app.get("/api/posts/:userid", controller.get_posts);
+
+app.get("/api/post/:postid", controller.post_id);
+
+app.post("/api/post/:userid", controller.userid);
+
+const port = 4000;
+
+app.listen(port, () => console.log(`{0,0} is Listening on Port ${port}`));
