@@ -95,5 +95,25 @@ module.exports = {
       .then(info => {
         res.status(200).send(info);
       });
+  },
+
+  //Just place PUT on Server and not the front end and tested with Postman to make sure it is working.
+  edit_username: (req, res) => {
+    const db = req.app.get("db");
+    const { username } = req.body;
+    const { id } = req.params;
+    console.log("User Deleted");
+    db.editusername([username, id]).then(info => {
+      res.status(200).send(info);
+    });
+  },
+
+  //Just place DELETE on Server and not the front end and tested with Postman to make sure it is working.
+  delete_user: (req, res) => {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    db.deleteusername([id]).then(info => {
+      res.status(200).send(info);
+    });
   }
 };

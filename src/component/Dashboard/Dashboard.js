@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 class Dashboard extends Component {
   constructor() {
@@ -46,7 +45,7 @@ class Dashboard extends Component {
       )
       .then(res => {
         console.log(res);
-        this.setState({ posts: res.data });
+        this.setState({ posts: res.data.posts });
       });
   }
 
@@ -58,14 +57,15 @@ class Dashboard extends Component {
   //Had profile_pic as profilePic and it didn't work. Worked out the bug and now it's working with profile_pic.
   render() {
     let posts = this.state.posts.map((elem, index) => {
-      console.log('elem', elem)
-        return (
-        <Link to={`/post/${elem.id}`} key={ elem.id }>
-        <div >
-          <p>Post Title: {elem.title}</p>
-          <p>Authors Name: {elem.username}</p>
-          <img src={elem.profile_pic} alt="" width='200px' />
-        </div></Link>
+      console.log("elem", elem);
+      return (
+        <Link to={`/post/${elem.id}`} key={elem.id}>
+          <div>
+            <p>Post Title: {elem.title}</p>
+            <p>Authors Name: {elem.username}</p>
+            <img src={elem.profile_pic} alt="" width="200px" />
+          </div>
+        </Link>
       );
     });
     return (
@@ -90,12 +90,11 @@ class Dashboard extends Component {
   }
 }
 
-
 //pulling id off of Redux State
-let mapPropsToState = (state) => {
-    return{
-        id: state.id
-    }
-}
+let mapPropsToState = state => {
+  return {
+    id: state.id
+  };
+};
 
-export default connect(mapPropsToState) (Dashboard);
+export default connect(mapPropsToState)(Dashboard);

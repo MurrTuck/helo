@@ -49,6 +49,12 @@ app.get("/api/post/:postid", controller.post_id);
 
 app.post("/api/post/:userid", controller.userid);
 
+//Just place PUT on Server and not the front end and tested with Postman to make sure it is working.
+app.put("/api/edit/:id", controller.edit_username);
+
+//Just place DELETE on Server and not the front end and tested with Postman to make sure it is working.
+app.delete("/api/delete/:id", controller.delete_user);
+
 const port = 4000;
 
 app.listen(port, () => console.log(`{0,0} is Listening on Port ${port}`));
