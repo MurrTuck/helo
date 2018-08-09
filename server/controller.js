@@ -1,3 +1,5 @@
+//React #27 'node server' using 'express'
+
 module.exports = {
   create_user: (req, res) => {
     console.log("POST Endpoint is getting hit!");
@@ -19,6 +21,7 @@ module.exports = {
       });
   },
 
+  //React #30 using "params"
   get_posts: (req, res) => {
     console.log("get_posts hit");
     const db = req.app.get("db");
@@ -33,6 +36,7 @@ module.exports = {
     );
 
     //When the users logs first time...
+    //React #28 using "Status Codes"
     if (req.query.userposts && req.query.search) {
       db.get_posts_by_user([req.query.search])
         .then(posts => {

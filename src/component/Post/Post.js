@@ -15,9 +15,9 @@ class Post extends Component {
     };
   }
 
+  //React #18 using 'Match'
   componentDidMount() {
-    axios.get(`/api/post/${this.props.match.params.postid}`)
-    .then(res => {
+    axios.get(`/api/post/${this.props.match.params.postid}`).then(res => {
       this.setState({ post: res.data[0] });
     });
   }

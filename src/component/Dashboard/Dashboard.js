@@ -20,6 +20,7 @@ class Dashboard extends Component {
     this.setState({ search: e });
   }
 
+  //React #13 using 'props'
   resetSearch() {
     axios
       .get(
@@ -32,10 +33,12 @@ class Dashboard extends Component {
       });
   }
 
+  //React #19 to use 'componentDidMount'
   componentDidMount() {
     this.getPosts();
   }
 
+  //React #14 using 'axios'
   getPosts() {
     axios
       .get(
@@ -91,6 +94,7 @@ class Dashboard extends Component {
 }
 
 //pulling id off of Redux State
+//React #22 using 'connect', 'mapPropsToState'
 let mapPropsToState = state => {
   return {
     id: state.id

@@ -1,3 +1,5 @@
+//React #21 using Redux 'store', 'reducer'
+
 import { createStore } from "redux";
 import reducer from "./reducer";
 
