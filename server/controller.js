@@ -103,6 +103,7 @@ module.exports = {
   },
 
   //Just place PUT on Server and not the front end and tested with Postman to make sure it is working.
+  //React #34 using PUT in Endpoint
   edit_username: (req, res) => {
     const db = req.app.get("db");
     const { username } = req.body;
@@ -114,6 +115,7 @@ module.exports = {
   },
 
   //Just place DELETE on Server and not the front end and tested with Postman to make sure it is working.
+  //React #35 using DELETE in Endpoint
   delete_user: (req, res) => {
     const db = req.app.get("db");
     const { id } = req.params;

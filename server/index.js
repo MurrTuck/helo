@@ -9,14 +9,17 @@ const session = require("express-session");
 
 const { CONNECTION_STRING } = process.env;
 
+//React #27 using express in node server
 const app = express();
 
 app.use(bodyParser.json());
 
+//React #50 using massive to connect to Database
 massive(CONNECTION_STRING).then(db => {
   app.set("db", db);
 });
 
+//React #38 using sessions
 app.use(
   session({
     secret: "Shhhhhhh",
@@ -25,6 +28,8 @@ app.use(
   })
 );
 
+//React #36 & #37 using middleware
+//React #38 using sessions
 function middleware(req, res, next) {
   if (!req.session.user) {
     req.session.user = { counter: 0 };
@@ -38,6 +43,7 @@ app.post("/api/auth/register", controller.create_user);
 
 app.post("/api/auth/login", controller.login_user);
 
+//React #38 using sessions
 app.post("/api/session", (req, res, next) => {
   req.session.destroy();
   res.status(200).send("Session Destroyed");
