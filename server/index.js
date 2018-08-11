@@ -45,16 +45,20 @@ app.post("/api/session", (req, res, next) => {
 
 app.use(middleware);
 
+//React #32 using GET Endpoint
 app.get("/api/posts/:userid", controller.get_posts);
 
+//React #33 using POST Endpoint
 app.get("/api/post/:postid", controller.post_id);
 
 app.post("/api/post/:userid", controller.userid);
 
 //Just place PUT on Server and not the front end and tested with Postman to make sure it is working.
+//React #34 using PUT Endpoint
 app.put("/api/edit/:id", controller.edit_username);
 
 //Just place DELETE on Server and not the front end and tested with Postman to make sure it is working.
+// React #35 using DELETE Endpoint
 app.delete("/api/delete/:id", controller.delete_user);
 
 const port = 4000;
