@@ -12,6 +12,7 @@ const { CONNECTION_STRING } = process.env;
 //React #27 using express in node server
 const app = express();
 
+//React #27 using the static files
 app.use(express.static("public"));
 
 app.use(bodyParser.json());
