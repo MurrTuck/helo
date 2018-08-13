@@ -12,6 +12,8 @@ const { CONNECTION_STRING } = process.env;
 //React #27 using express in node server
 const app = express();
 
+app.use(express.static("public"));
+
 app.use(bodyParser.json());
 
 //React #50 using massive to connect to Database
