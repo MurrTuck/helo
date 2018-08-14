@@ -1,4 +1,4 @@
 -- React #46 using Alter table
-ALTER TABLE users
+UPDATE users
 SET username = $1
 WHERE id = $2
