@@ -115,6 +115,7 @@ module.exports = {
   },
 
   //Just place DELETE on Server and not the front end and tested with Postman to make sure it is working.
+  //Post man is working!
   //React #35 using DELETE in Endpoint
   delete_user: (req, res) => {
     const db = req.app.get("db");
